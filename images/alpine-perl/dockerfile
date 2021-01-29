@@ -1,0 +1,18 @@
+FROM alpine:latest
+
+RUN apk add perl
+
+RUN apk add perl-utils
+
+RUN apk add make
+
+RUN find /usr -name "*cpan*"
+
+COPY set-perl-env .
+
+COPY perl-command .
+
+RUN source ./set-perl-env && \
+    echo $PATH && \
+    cpan Carton && \
+    cpan local::lib

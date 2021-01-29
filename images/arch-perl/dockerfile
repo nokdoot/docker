@@ -1,0 +1,24 @@
+FROM archlinux:latest
+
+RUN yes | pacman -Syu
+
+RUN yes | pacman -S reflector
+
+RUN yes | reflector -l 5 --sort rate --save /etc/pacman.d/mirrorlist
+
+RUN yes | pacman -S core/which
+
+RUN yes | pacman -S perl
+
+RUN yes | pacman -S make
+
+RUN yes | pacman -S cpanminus
+
+COPY set-perl-env .
+
+COPY perl-command .
+
+RUN source ./set-perl-env && \
+    echo $PATH && \
+    cpan Carton && \
+    cpan local::lib

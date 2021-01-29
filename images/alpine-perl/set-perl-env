@@ -1,0 +1,9 @@
+#!/bin/sh
+
+CORE=`perl -V | perl -nle'print $1 if $_ =~ /Dscriptdir=(.*?) /'`;
+SITE=`perl -V | perl -nle'print $1 if $_ =~ /Dsitescript=(.*?) /'`;
+VENDOR=`perl -V | perl -nle'print $1 if $_ =~ /Dvendorscript=(.*?) /'`;
+
+export PATH=$CORE:$PATH;
+export PATH=$SITE:$PATH;
+export PATH=$VENDOR:$PATH;
